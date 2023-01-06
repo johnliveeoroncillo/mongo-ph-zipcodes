@@ -166,7 +166,7 @@ const API_RESPONSE = (response: any, res?: Response): HttpResponse => {
         new_response = JSON.parse(JSON.stringify(response));
         code = new_response?.code ?? 500;
         code = isNaN(code) ? 500 : code;
-        if (code === 8000) code = 500;
+        if ([8000, 11000].includes(code)) code = 500;
         new_response.code = code;
         new_response.message = new_response?.message ?? response.toString();
     } catch (e: any) {

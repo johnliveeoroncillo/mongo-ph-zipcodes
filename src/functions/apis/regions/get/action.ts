@@ -10,6 +10,10 @@ export class RegionsGetAction {
     }
 
     async execute(): Promise<RegionModel[]> {
-        return await this.regions.findCollections();
+        let response = await this.regions.findCollections();
+        response = response.sort((a, b) => {
+            return a.zip_code < b.zip_code ? -1 : 1;
+        });
+        return response;
     }
 }
